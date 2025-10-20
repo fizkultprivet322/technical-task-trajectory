@@ -13,4 +13,5 @@ npm run dev
 Откройте `http://localhost:5173`.
 
 
-
+## Сайт также доступен на хостинге GitHub Pages:
+`https://fizkultprivet322.github.io/technical-task-trajectory/`
