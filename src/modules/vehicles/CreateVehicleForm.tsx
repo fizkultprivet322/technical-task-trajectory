@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import type { VehicleCreateInput } from '../../types/vehicle'
+import { validateColor, validateModel, validateName, validatePrice, validateYear } from '../../utils/validators'
 
 export function CreateVehicleForm({ onCreate }: { onCreate: (input: VehicleCreateInput) => void }) {
   const [form, setForm] = useState<VehicleCreateInput>({
@@ -17,20 +18,20 @@ export function CreateVehicleForm({ onCreate }: { onCreate: (input: VehicleCreat
 
     setError(null)
 
-    if (!form.name.trim() || !form.model.trim()) {
-      setError('Марка и модель обязательны')
-      return
-    }
+    const nameErr = validateName(form.name)
+    if (nameErr) { setError(nameErr); return }
 
-    if (form.year < 1900 || form.year > 2100) {
-      setError('Некорректный год')
-      return
-    }
+    const modelErr = validateModel(form.model)
+    if (modelErr) { setError(modelErr); return }
 
-    if (form.price < 0) {
-      setError('Цена не может быть отрицательной')
-      return
-    }
+    const yearErr = validateYear(form.year)
+    if (yearErr) { setError(yearErr); return }
+
+    const colorErr = validateColor(form.color)
+    if (colorErr) { setError(colorErr); return }
+
+    const priceErr = validatePrice(form.price)
+    if (priceErr) { setError(priceErr); return }
 
     onCreate(form)
 

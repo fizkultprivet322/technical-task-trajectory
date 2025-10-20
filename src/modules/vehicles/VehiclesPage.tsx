@@ -3,6 +3,7 @@ import { useVehicles } from './useVehicles'
 import type { Vehicle } from '../../types/vehicle'
 import { CreateVehicleForm } from './CreateVehicleForm'
 import { MapModal } from './MapModal'
+import { validateName, validatePrice } from '../../utils/validators'
 
 function ActionMenu({ onEdit, onDelete }: { onEdit: () => void; onDelete: () => void }) {
   return (
@@ -129,8 +130,12 @@ export const VehiclesPage: React.FC = () => {
                           className="btn"
                           onClick={() => {
                             const priceNum = Number(editPrice)
-                            if (!Number.isFinite(priceNum) || priceNum < 0) return
-                            update(v.id, { name: editName.trim() || v.name, price: priceNum })
+                            const nameErr = validateName(editName)
+                            const priceErr = validatePrice(priceNum)
+                            if (nameErr || priceErr) {
+                              return
+                            }
+                            update(v.id, { name: editName.trim(), price: priceNum })
                             setEditId(null)
                           }}
                         >Сохранить</button>
