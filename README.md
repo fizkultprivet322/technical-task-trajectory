@@ -14,4 +14,4 @@ npm run dev
 
 
 ## Сайт также доступен на хостинге GitHub Pages:
-`https://fizkultprivet322.github.io/technical-task-trajectory/`
+[Ссылка](https://fizkultprivet322.github.io/technical-task-trajectory/)
